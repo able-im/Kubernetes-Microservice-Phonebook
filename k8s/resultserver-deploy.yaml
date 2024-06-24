@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: resultserver
+  name: resultserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resultserver
+  template:
+    metadata:
+      labels:
+        app: resultserver
+    spec:
+      containers:
+      - image: ableim/resultserver
+        name: resultserver
+        envFrom:
+        - secretRef:
+            name: mysql-secret
+        - configMapRef:
+            name: mysql-cm
+        ports:
+        - containerPort: 80

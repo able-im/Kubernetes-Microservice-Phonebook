@@ -1,0 +1,2 @@
+webserver_image: ableim/webserver
+resultserver_image: ableim/resultserver

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webserver
+  name: webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - image: ableim/webserver
+        name: webserver
+        envFrom:
+        - secretRef:
+            name: mysql-secret
+        - configMapRef:
+            name: mysql-cm
+        ports:
+        - containerPort: 80
